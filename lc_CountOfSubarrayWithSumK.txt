@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        map<int,int> mp;
+        int sum=0,count=0,target,i,prev=0;
+        
+        for(i=0;i<nums.size();i++)
+        {
+           
+            sum = sum+nums[i];
+            
+             if(sum==k)
+                count++;
+            target = sum-k;
+            
+                if(mp.find(target)!=mp.end())
+                count=count+mp[target];
+            
+            mp[sum]++;
+
+        
+        }
+        return count;
+    }
+};
