@@ -1,0 +1,22 @@
+string timeConversion(string s) {
+    /*
+     * Write your code here.
+     */
+  int hh,i;
+  hh = (int)(10*(s[0]-48)+(s[1]-48));
+  if(s[8]=='P' && hh<12)
+  hh=hh+12;
+  if(s[8]=='A' && hh==12)
+  hh=00;
+  char c1=(hh%10)+48;
+  hh=hh/10;
+  char c2=(hh)+48;
+  string a="hh:mm:ss";
+  a[0]=c2;a[1]=c1;
+  for(i=2;i<8;i++)
+  a[i]=s[i];
+  
+  return a;
+
+  
+}

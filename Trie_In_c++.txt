@@ -1,0 +1,161 @@
+Implement a trie with insert, search, and startsWith methods.
+
+Example:
+
+Trie trie = new Trie();
+
+trie.insert("apple");
+trie.search("apple");   // returns true
+trie.search("app");     // returns false
+trie.startsWith("app"); // returns true
+trie.insert("app");   
+trie.search("app");     // returns true
+Note:
+
+You may assume that all inputs are consist of lowercase letters a-z.
+All inputs are guaranteed to be non-empty strings.
+C++	
+1
+​
+2
+​
+3
+class Trie {
+4
+public:
+5
+    Trie *children[26];
+6
+    bool is_end;
+7
+public:
+8
+    /** Initialize your data structure here. */
+9
+    Trie() {
+10
+        this ->is_end=false;
+11
+        for(int i=0;i<26;i++){
+12
+            this->children[i]=NULL;
+13
+        }
+14
+    }
+15
+    
+16
+    
+17
+    /** Inserts a word into the trie. */
+18
+    void insert(string word) {
+19
+            Trie* temp=this;
+20
+            for(int i=0;i<word.length();i++)
+21
+            {
+22
+                int key=word[i]-'a';
+23
+                cout<<key<<endl;
+24
+                if (temp->children[key]==NULL)
+25
+                temp->children[key] = new Trie();
+26
+                temp = temp->children[key];
+27
+            }
+28
+            temp->is_end = true;
+29
+        
+30
+    }
+31
+    
+32
+    /** Returns if the word is in the trie. */
+33
+    bool search(string word) {
+34
+        Trie* temp = this;
+35
+        if(!temp)
+36
+            return false;
+37
+        for(int i=0;i<word.length();i++)
+38
+        {
+39
+            int key = word[i]-'a';
+40
+            if(temp->children[key]!=NULL)
+41
+                temp=temp->children[key];
+42
+            else
+43
+                return false;
+44
+            
+45
+        }
+46
+        return (temp->is_end);
+47
+    }
+48
+    
+49
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+50
+    bool startsWith(string prefix) {  
+51
+        if(prefix.length()==0)
+52
+            return true;
+53
+        Trie* temp = this;
+54
+        for(int i=0;i<prefix.length();i++){
+55
+             int key = prefix[i]-'a';
+56
+            if(temp->children[key]!=NULL)
+57
+                temp=temp->children[key];
+58
+            else
+59
+                return false;
+60
+        }
+61
+        
+62
+        return true;
+63
+    }
+64
+};
+65
+​
+66
+/**
+67
+ * Your Trie object will be instantiated and called as such:
+68
+ * Trie* obj = new Trie();
+69
+ * obj->insert(word);
+70
+ * bool param_2 = obj->search(word);
+71
+ * bool param_3 = obj->startsWith(prefix);
+72
+ */
