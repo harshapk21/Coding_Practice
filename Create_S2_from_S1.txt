@@ -1,0 +1,44 @@
+Print Yes if you can obtain string by performing exactly operations on ; otherwise, print No.
+Sample Input 0
+hackerhappy
+hackerrank
+9
+Sample Output 0
+Yes
+Explanation 0
+We perform delete operations to reduce string to hacker . Next, we perform append operations (i.e.,
+r , a , n, and k ), to get hackerrank . Because we were able to convert to by performing exactly
+operations, we print Yes .
+Sample Input 1
+aba
+aba
+7
+Sample Output 1
+yes
+
+
+
+
+
+solution:
+
+string appendAndDelete(string s, string t, int k) {
+int n1 = s.length();
+int n2 = t.length();
+int key=0,i=0;
+while(i<n1 && i<n2){
+if(s[i]==t[i])
+{
+i++;
+continue;
+}
+else
+break;
+}
+key = (n1-i)+(n2-i);
+if(k<key)
+return "No";
+else if((k==key) || ((k-key)%2==0) || (k)>=(n1+n2))
+return "Yes";
+return "No";
+}
